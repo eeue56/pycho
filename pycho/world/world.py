@@ -13,11 +13,6 @@ try:
 except NameError:
     xrange = range
 
-
-def register_object(object_name, object_class):
-    known_objects[object_name] = object_class
-
-
 class World(object):
 
     def __init__(self, player, level_controller):
