@@ -1,0 +1,58 @@
+{
+    "0":{
+        "width" : 80,
+        "height" : 80,
+        "color":{
+            "r" : 0,
+            "g" : 0,
+            "b" : 0
+        },
+        "walls":{
+            "up" : {
+                "leads_to" : 1,
+                "width" : 2
+            },
+            "down" : {
+                "leads_to" : 1,
+                "width" : 2
+            },
+            "left" : {
+                "leads_to" : 1,
+                "width" : 2
+            },
+            "right" : {
+                "leads_to" : 1,
+                "width" : 2
+            }
+        },
+        "fixed":{
+            "word":{
+                "render_trousers" : false,
+                "x":15,
+                "y":79,
+                "word" : "hello!\nyou are\n stuck\n1"
+            }
+        },
+        "random":{
+            "old_grumper" : {
+                "amount" : 3,
+                "between" : {
+                    "x" : 5,
+                    "y" : 5,
+                    "width" : 50,
+                    "height" : 50
+                },
+                "colors" : [{
+                    "r" : 255,
+                    "g" : 0,
+                    "b" : 0
+                },
+                {
+                    "r" : 0,
+                    "g" : 255,
+                    "b" : 0
+                }]
+            }
+      }
+  }
+}
