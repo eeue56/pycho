@@ -7,5 +7,7 @@ def test_known_objects():
 
     assert 'fish' in known_objects
 
+
+
 def main():
     test_known_objects()
