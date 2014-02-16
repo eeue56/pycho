@@ -3,7 +3,7 @@ from __future__ import division, print_function
 from pycho.world_exceptions import *
 from pycho.misc import *
 
-from pycho.world_objects import Word, Wall
+from pycho.world_objects import Word, Wall, known_objects
 from pycho.hivemind import Action
 
 from random import choice
@@ -12,6 +12,11 @@ try:
     xrange(1)
 except NameError:
     xrange = range
+
+
+def register_object(object_name, object_class):
+    known_objects[object_name] = object_class
+
 
 class World(object):
 
