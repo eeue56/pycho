@@ -1,9 +1,12 @@
-from PyQt4 import QtGui, QtCore, QtOpenGL
+from PyQt5 import QtGui, QtCore, QtOpenGL, QtWidgets
 
 from pycho.gui.widgets import GLPlotWidget
 from pycho.misc import *
 
-class DefaultWindow(QtGui.QMainWindow):
+import logging
+
+
+class DefaultWindow(QtWidgets.QMainWindow):
     def __init__(self, game):
         super(DefaultWindow, self).__init__()
 
@@ -16,20 +19,26 @@ class DefaultWindow(QtGui.QMainWindow):
         self.setCentralWidget(self.widget)
         self.show()
 
-        self.paint_timer = QtCore.QTimer()
-        QtCore.QObject.connect(self.paint_timer, QtCore.SIGNAL("timeout()"), self.widget.updateGL)
-        self.clean_timer = QtCore.QTimer()
-        QtCore.QObject.connect(self.clean_timer, QtCore.SIGNAL("timeout()"), self.game.world.clean_up)
+        self.paint_timer = QtCore.QBasicTimer()
 
+
+        #QtCore.QObject.connect(self.paint_timer, QtCore.SIGNAL("timeout()"), self.widget.updateGL)
+        self.clean_timer = QtCore.QBasicTimer()
+        #QtCore.QObject.connect(self.clean_timer, QtCore.SIGNAL("timeout()"), self.game.world.clean_up)
+
+        self.callbacks = [self.widget.updateGL, self.game.world.clean_up]
         QtCore.QMetaObject.connectSlotsByName(self)
         
-        self.paint_timer.start(30)
-        self.clean_timer.start(500)
+        self.paint_timer.start(30, self)
+        self.clean_timer.start(40, self)
 
         self.resize(600, 400)
 
-    def keyPressEvent(self, event):
+    def timerEvent(self, event):
+        self.callbacks[event.timerId() - 1]()
 
+
+    def keyPressEvent(self, event):
         key = event.key()
 
         if key == QtCore.Qt.Key_A:
@@ -52,4 +61,4 @@ class DefaultWindow(QtGui.QMainWindow):
 
     def closeEvent(self, event):
         logging.debug("Dumping to text file")
-        self.world.mind_dump()
+        self.game.world.mind_dump()

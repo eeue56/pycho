@@ -3,7 +3,7 @@
 from __future__ import division
 
 # PyQT4 imports
-from PyQt4 import QtGui
+from PyQt5 import QtGui, QtWidgets
 
 from pycho.misc import *
 
@@ -30,7 +30,7 @@ if __name__ == '__main__':
     world = World(player, level_controller)
     game = Game(player, world)
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     window = DefaultWindow(game)
     window.show()
     app.exec_()

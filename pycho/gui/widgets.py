@@ -1,4 +1,4 @@
-from PyQt4.QtOpenGL import QGLWidget
+from PyQt5.QtOpenGL import QGLWidget
 
 import OpenGL.GL as gl
 import OpenGL.arrays.vbo as glvbo
