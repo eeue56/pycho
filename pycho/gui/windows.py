@@ -1,4 +1,4 @@
-from PyQt5 import QtGui, QtCore, QtOpenGL, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 from pycho.gui.widgets import GLPlotWidget
 from pycho.misc import *
