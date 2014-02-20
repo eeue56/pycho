@@ -3,11 +3,13 @@ from PyQt5 import QtGui, QtCore, QtOpenGL, QtWidgets
 from pycho.gui.widgets import GLPlotWidget
 from pycho.misc import *
 
+from pycho.gui.interaction import KEYS
+
 import logging
 
 
 class DefaultWindow(QtWidgets.QMainWindow):
-    def __init__(self, game):
+    def __init__(self, game, key_press_handler=None):
         super(DefaultWindow, self).__init__()
 
         self.game = game
@@ -21,10 +23,7 @@ class DefaultWindow(QtWidgets.QMainWindow):
 
         self.paint_timer = QtCore.QBasicTimer()
 
-
-        #QtCore.QObject.connect(self.paint_timer, QtCore.SIGNAL("timeout()"), self.widget.updateGL)
         self.clean_timer = QtCore.QBasicTimer()
-        #QtCore.QObject.connect(self.clean_timer, QtCore.SIGNAL("timeout()"), self.game.world.clean_up)
 
         self.callbacks = [self.widget.updateGL, self.game.world.clean_up]
         QtCore.QMetaObject.connectSlotsByName(self)
@@ -34,30 +33,37 @@ class DefaultWindow(QtWidgets.QMainWindow):
 
         self.resize(600, 400)
 
+
+        if key_press_handler is None:
+            key_press_handler = lambda self, event: self._defaultKeyPressHandler(event)
+
+        self.key_press_handler = key_press_handler
+
+
     def timerEvent(self, event):
         self.callbacks[event.timerId() - 1]()
 
-
-    def keyPressEvent(self, event):
+    def _defaultKeyPressHandler(self, event):
         key = event.key()
 
-        if key == QtCore.Qt.Key_A:
+        if key == KEYS['Key_A']:
             face_movement = DIRECTIONS['left']
-        elif key == QtCore.Qt.Key_D:
+        elif key == KEYS['Key_D']:
             face_movement = DIRECTIONS['right']
-        elif key == QtCore.Qt.Key_W:
+        elif key == KEYS['Key_W']:
             face_movement = DIRECTIONS['up']
-        elif key == QtCore.Qt.Key_S:
+        elif key == KEYS['Key_S']:
             face_movement = DIRECTIONS['down']
-        elif key == QtCore.Qt.Key_Space: 
+        elif key == KEYS['Key_Space']: 
             face_movement = DIRECTIONS['still']
         else:
             return
 
         self.game.player.facing = face_movement
-
         self.game.world.tick()
 
+    def keyPressEvent(self, event):
+        self.key_press_handler(self, event)
 
     def closeEvent(self, event):
         logging.debug("Dumping to text file")
