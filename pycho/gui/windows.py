@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtWidgets
 
 from pycho.gui.widgets import GLPlotWidget
-from pycho.misc import *
+from pycho.world.navigation import DIRECTIONS
 
 from pycho.gui.interaction import KEYS
 
@@ -38,7 +38,6 @@ class DefaultWindow(QtWidgets.QMainWindow):
             key_press_handler = lambda self, event: self._defaultKeyPressHandler(event)
 
         self.key_press_handler = key_press_handler
-
 
     def timerEvent(self, event):
         self.callbacks[event.timerId() - 1]()

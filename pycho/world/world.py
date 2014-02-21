@@ -1,7 +1,8 @@
 from __future__ import division, print_function
 
 from pycho.world_exceptions import *
-from pycho.misc import *
+
+from pycho.world.navigation import DIRECTIONS, MOVEMENTS, opposite_direction
 
 from pycho.world_objects import Word, Wall, known_objects
 from pycho.hivemind import Action

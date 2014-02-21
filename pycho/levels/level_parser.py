@@ -3,7 +3,8 @@ from json import dumps, loads
 from random import choice, randint
 
 from pycho.levels import Level
-from pycho.misc import *
+
+from pycho.world.navigation import DIRECTIONS
 from pycho.world_objects import Wall, known_objects
 
 import logging

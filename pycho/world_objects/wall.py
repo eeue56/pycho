@@ -1,7 +1,9 @@
 from __future__ import division
 
 from pycho.world_objects import WorldObject
-from pycho.misc import * 
+from pycho.world.navigation import DIRECTIONS
+
+from pycho.gl.color import COLORS
 
 try:
     xrange(1)
@@ -14,7 +16,7 @@ class Wall(WorldObject):
         y, 
         width=5, 
         gaps=None, 
-        color=COLOURS['grey'], 
+        color=COLORS['grey'], 
         facing=DIRECTIONS['up'], 
         speed=0,
         *args,

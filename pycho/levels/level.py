@@ -1,7 +1,7 @@
 from pycho.world_exceptions import *
 
 try:
-    xrange(2)
+    xrange(1)
 except NameError:
     xrange = range
 

@@ -1,8 +1,10 @@
 from __future__ import division
 
 from pycho.world_objects import WorldObject
-from pycho.misc import *
+from pycho.world.navigation import DIRECTIONS, opposite_direction
 from pycho.world_exceptions import *
+
+from pycho.gl.color import COLORS
 
 from random import randint, choice
 
@@ -15,7 +17,7 @@ except NameError:
 
 class Fragment(WorldObject):
     def __init__(self, x, y, 
-        color=COLOURS['grey'], 
+        color=COLORS['grey'], 
         facing=DIRECTIONS['up'], 
         health=3, 
         scale=1,
@@ -44,7 +46,7 @@ class Fragment(WorldObject):
 
 class Bomb(WorldObject):
     def __init__(self, x, y, 
-        color=COLOURS['grey'], 
+        color=COLORS['grey'], 
         facing=DIRECTIONS['up'], 
         health=3, 
         scale=1,
@@ -54,7 +56,7 @@ class Bomb(WorldObject):
         **kwargs):
 
         WorldObject.__init__(self, x, y, color, facing, health=health, scale=scale, spawner=spawner, *args, **kwargs)
-        self.center_color = COLOURS['red']
+        self.center_color = COLORS['red']
         self.max_scale = max_scale
 
     def populated_at(self, x, y):

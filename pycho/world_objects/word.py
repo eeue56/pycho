@@ -1,14 +1,16 @@
 from __future__ import division
 
 from pycho.world_objects import WorldObject
-from pycho.misc import * 
+from pycho.world.navigation import DIRECTIONS
+
+from pycho.gl.color import COLORS
 
 class Word(WorldObject):
     def __init__(self, 
         x, 
         y, 
         word, 
-        color=COLOURS['grey'], 
+        color=COLORS['grey'], 
         facing=DIRECTIONS['up'], 
         speed=0,
         *args,

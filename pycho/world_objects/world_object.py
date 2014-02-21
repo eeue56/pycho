@@ -2,7 +2,13 @@ from __future__ import division
 
 import OpenGL.GL as gl
 
-from pycho.misc import into_sections, draw_square, DIRECTIONS
+from pycho.gl.drawing import draw_square
+
+from pycho.core.blocking import into_sections
+
+
+from pycho.world.navigation import DIRECTIONS
+
 from pycho.hivemind import RecordingMind, Action
 
 

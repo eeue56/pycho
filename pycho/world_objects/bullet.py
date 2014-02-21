@@ -1,15 +1,17 @@
 from __future__ import division
 
 from pycho.world_objects import WorldObject
-from pycho.misc import *
+from pycho.world.navigation import DIRECTIONS
 from pycho.world_exceptions import *
+
+from pycho.gl.color import COLORS
 
 from random import randint, choice
 
 
 class Bullet(WorldObject):
     def __init__(self, x, y, 
-        color=COLOURS['grey'], 
+        color=COLORS['grey'], 
         facing=DIRECTIONS['up'], 
         health=1, 
         scale=1,
