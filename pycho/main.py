@@ -3,6 +3,7 @@ from pycho.misc import *
 from pycho.world import World
 from pycho.core.game import Game
 from pycho.gui.windows import DefaultWindow
+from pycho.gui.application import Application
 
 from pycho.world_objects import Player
 from pycho.levels import LevelController, generate_objects
@@ -23,7 +24,7 @@ if __name__ == '__main__':
     world = World(player, level_controller)
     game = Game(player, world)
 
-    app = QtWidgets.QApplication(sys.argv)
+    app = Application(sys.argv)
     window = DefaultWindow(game)
     window.show()
     app.exec_()

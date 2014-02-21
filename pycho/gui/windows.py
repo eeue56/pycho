@@ -46,15 +46,15 @@ class DefaultWindow(QtWidgets.QMainWindow):
     def _defaultKeyPressHandler(self, event):
         key = event.key()
 
-        if key == KEYS['Key_A']:
+        if key == KEYS['A']:
             face_movement = DIRECTIONS['left']
-        elif key == KEYS['Key_D']:
+        elif key == KEYS['D']:
             face_movement = DIRECTIONS['right']
-        elif key == KEYS['Key_W']:
+        elif key == KEYS['W']:
             face_movement = DIRECTIONS['up']
-        elif key == KEYS['Key_S']:
+        elif key == KEYS['S']:
             face_movement = DIRECTIONS['down']
-        elif key == KEYS['Key_Space']: 
+        elif key == KEYS['Space']: 
             face_movement = DIRECTIONS['still']
         else:
             return
