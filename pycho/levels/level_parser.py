@@ -3,6 +3,7 @@ from json import dumps, loads
 from random import choice, randint
 
 from pycho.levels import Level
+from pycho.levels.helpers import *
 
 from pycho.world.navigation import DIRECTIONS
 from pycho.world_objects import Wall, known_objects
@@ -14,8 +15,6 @@ try:
 except NameError:
     xrange = range
 
-def _color_dict_to_tuple(color):
-    return color.values()
 
 def _has_trousers(object_data):
     if 'render_trousers' in object_data:
@@ -33,7 +32,7 @@ def _generate_fixed(level, fixed_records):
             continue
 
         if 'color' in object_data:
-            object_data['color'] = _color_dict_to_tuple(object_data['color'])
+            object_data['color'] = color_dict_to_tuple(object_data['color'])
         level.add_object(known_objects[object_class](**object_data))
 
 
@@ -95,7 +94,7 @@ def generate_objects(file_data):
     for level_id, level_data in data.items():
         world_width = level_data['width']
         world_height = level_data['height']
-        color = _color_dict_to_tuple(level_data['color'])
+        color = color_dict_to_tuple(level_data['color'])
 
         is_first = level_data['is_first'] if 'is_first' in level_data else False
 
@@ -112,7 +111,7 @@ def generate_objects(file_data):
         if 'random' in level_data:
             _generate_random(level, level_data['random'])
 
-        level_dict[int(level_id)] = level
+        level_dict[level_id] = level
 
     if len(data) == len(level_dict):
         logging.debug("All levels loaded correctly.")

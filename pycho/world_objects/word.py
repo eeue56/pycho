@@ -685,8 +685,6 @@ class Word(WorldObject):
         return populated
     #'abcdefghijklmnopqrstuvwxyz
 
-
-
     def populated_at(self, x, y):
 
         letter_map = {

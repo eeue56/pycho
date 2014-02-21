@@ -1,14 +1,22 @@
 from pycho.world_exceptions import *
 
+from pycho.levels.helpers import color_tuple_to_dict
+from json import dumps
+
 try:
     xrange(1)
 except NameError:
     xrange = range
 
-
 class Level(object):
 
-    def __init__(self, color, walls, width, height, objects=None, is_first=None):
+    def __init__(self, 
+        color, 
+        walls, 
+        width, 
+        height, 
+        objects=None, 
+        is_first=None):
         self.color = color
         self.walls = walls
         self.width = width
@@ -47,3 +55,11 @@ class Level(object):
         for object_ in objects:
             self.add_object(object_)
 
+    def to_json(self):
+
+        return dumps({
+            'is_first' : self.is_first,
+            'width' : self.width,
+            'height' : self.height,
+            'color' : color_tuple_to_dict(self.color),
+        })
