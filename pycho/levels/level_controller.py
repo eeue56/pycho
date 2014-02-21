@@ -2,10 +2,17 @@ from pycho.levels.level_exceptions import *
 
 class LevelController(object):
 
-    def __init__(self, first, levels):
+    def __init__(self, levels, first=None):
 
         self.current_level = None
         self.levels = levels
+
+        if first is None:
+            for level in levels.values():
+                if level.is_first:
+                    first = level
+                    break
+
         self.current_level = first
 
     def start(self):

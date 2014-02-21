@@ -41,10 +41,10 @@ class DefaultWindow(QtWidgets.QMainWindow):
             key_press_handler = lambda self, event: self._defaultKeyPressHandler(event)
 
         if mouse_click_handler is None:
-            mouse_click_handler = lambda *a, *kw: None
+            mouse_click_handler = lambda *a, **kw: None
 
         if mouse_release_handler is None:
-            mouse_release_handler = lambda *a, *kw: None
+            mouse_release_handler = lambda *a, **kw: None
 
         self.key_press_handler = key_press_handler
         self.mouse_click_handler = mouse_click_handler

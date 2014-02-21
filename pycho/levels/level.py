@@ -8,7 +8,7 @@ except NameError:
 
 class Level(object):
 
-    def __init__(self, color, walls, width, height, objects=None):
+    def __init__(self, color, walls, width, height, objects=None, is_first=None):
         self.color = color
         self.walls = walls
         self.width = width
@@ -22,6 +22,10 @@ class Level(object):
         self.object_array = [[None for x in xrange(width)] for y in xrange(height)]
 
         self.add_objects(objects)
+
+        if is_first is None:
+            is_first = False
+        self.is_first = is_first
 
     def _clean_remains(self, populated):
         for (x, y) in populated:

@@ -21,7 +21,7 @@ if __name__ == '__main__':
     with open('level_data.json') as f:
         levels = generate_objects(f.read())
 
-    level_controller = LevelController(levels[0], levels)
+    level_controller = LevelController(levels)
     world = World(player, level_controller)
     game = Game(player, world)
 

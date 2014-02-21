@@ -97,9 +97,13 @@ def generate_objects(file_data):
         world_height = level_data['height']
         color = _color_dict_to_tuple(level_data['color'])
 
-        wall_dict, walls = _generate_walls(world_width, world_height, level_data['walls'])
+        is_first = level_data['is_first'] if 'is_first' in level_data else False
 
-        level = Level(color, wall_dict, world_width, world_height)
+
+        wall_dict, walls = _generate_walls(world_width, 
+            world_height, level_data['walls'])
+
+        level = Level(color, wall_dict, world_width, world_height, is_first=is_first)
         level.add_objects(walls)
 
         if 'fixed' in level_data:
