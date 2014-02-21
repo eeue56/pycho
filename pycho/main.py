@@ -1,10 +1,3 @@
-#!/usr/bin/python2
-
-from __future__ import division
-
-# PyQT4 imports
-from PyQt5 import QtGui, QtWidgets
-
 from pycho.misc import *
 
 from pycho.world import World
@@ -14,6 +7,7 @@ from pycho.gui.windows import DefaultWindow
 from pycho.world_objects import Player
 from pycho.levels import LevelController, generate_objects
  
+
 if __name__ == '__main__':
     import sys
     import logging
