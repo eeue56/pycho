@@ -5,6 +5,11 @@ from pycho.world.navigation import DIRECTIONS
 
 from pycho.gl.color import COLORS
 
+try:
+    xrange(1)
+except NameError:
+    xrange = range
+
 class Word(WorldObject):
     def __init__(self, 
         x, 
