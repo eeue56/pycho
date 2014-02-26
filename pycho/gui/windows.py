@@ -1,9 +1,13 @@
+from __future__ import division
+
 from PyQt5 import QtCore, QtWidgets
 
 from pycho.gui.widgets import GLPlotWidget
 from pycho.world.navigation import DIRECTIONS
 
 from pycho.gui.interaction import KEYS
+
+from pycho.world.helpers import box_around
 
 import logging
 
@@ -41,7 +45,7 @@ class DefaultWindow(QtWidgets.QMainWindow):
             key_press_handler = lambda self, event: self._defaultKeyPressHandler(event)
 
         if mouse_click_handler is None:
-            mouse_click_handler = lambda *a, **kw: None
+            mouse_click_handler = lambda self, event: self._defaultMousePressHandler(event)
 
         if mouse_release_handler is None:
             mouse_release_handler = lambda *a, **kw: None
@@ -71,6 +75,19 @@ class DefaultWindow(QtWidgets.QMainWindow):
 
         self.game.player.facing = face_movement
         self.game.world.tick()
+
+    def map_point_to_game_world(self, x, y):
+        i = int((x / self.widget.width) * self.game.world.width)
+        j = int((y / self.widget.height) * self.game.world.height)
+        return (i, j)
+
+    def _defaultMousePressHandler(self, event, pointer_size=5):
+        x, y = self.map_point_to_game_world(event.x(), event.y())
+
+        obj = self.game.world.colliding_object(None, 
+            box_around(x, y, pointer_size, pointer_size))
+
+        logging.error(obj)
 
     def keyPressEvent(self, event):
         self.key_press_handler(self, event)
