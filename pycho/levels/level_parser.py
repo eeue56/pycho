@@ -38,28 +38,29 @@ def _generate_fixed(level, fixed_records):
 
 
 def _generate_random(level, random_records):
-    for object_class, object_data in random_records.items():
+    for object_class, object_data_list in random_records.items():
         if object_class not in known_objects:
             logging.warning('no such class as {c}'.format(c=object_class))
             continue
 
-        if not _has_trousers(object_data):
-            continue
+        for object_data in object_data_list:
+            if not _has_trousers(object_data):
+                continue
 
-        position_information = object_data['between']
+            position_information = object_data['between']
 
-        x = position_information['x']
-        y = position_information['y']
-        high_x = x + position_information['width']
-        high_y = y + position_information['height']
-        colors = [color.values() for color in object_data['colors']]
+            x = position_information['x']
+            y = position_information['y']
+            high_x = x + position_information['width']
+            high_y = y + position_information['height']
+            colors = [color.values() for color in object_data['colors']]
 
-        for _ in xrange(object_data['amount']):
-            my_x = randint(x, high_x)
-            my_y = randint(y, high_y)
-            my_color = choice(colors)
+            for _ in xrange(object_data['amount']):
+                my_x = randint(x, high_x)
+                my_y = randint(y, high_y)
+                my_color = choice(colors)
 
-            level.add_object(known_objects[object_class](my_x, my_y, my_color, 0))
+                level.add_object(known_objects[object_class](my_x, my_y, my_color, 0))
 
 def _generate_walls(world_width, world_height, wall_records):
 

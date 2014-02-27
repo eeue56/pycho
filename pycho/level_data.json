@@ -29,7 +29,7 @@
         "fixed":{
             "word":[
                 {
-                    "render_trousers" : true,
+                    "render_trousers" : false,
                     "x":15,
                     "y":3,
                     "word" : "hello!\nyou are\n stuck\n1"
@@ -37,7 +37,7 @@
             ]
         },
         "random":{
-            "old_grumper" : {
+            "old_grumper" : [{
                 "amount" : 3,
                 "between" : {
                     "x" : 5,
@@ -55,7 +55,7 @@
                     "g" : 255,
                     "b" : 0
                 }]
-            }
+            }]
       }
   }
 }
