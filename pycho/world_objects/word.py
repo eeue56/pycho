@@ -907,58 +907,26 @@ class Word(WorldObject):
 
     #'abcdefghijklmnopqrstuvwxyz
 
-    def populated_at(self, x, y):
+    def _get_populate_method(self, letter):
+        try:
+            return self.__getattribute__('populate_{letter}'.format(letter=letter))
+        except:
+            return lambda *a, **kw: []
 
-        letter_map = {
-            'a' : self.populate_a,
-            'b' : self.populate_b,
-            'c' : self.populate_c,
-            'd' : self.populate_d,
-            'e' : self.populate_e,
-            'f' : self.populate_f,
-            'g' : self.populate_g,
-            'h' : self.populate_h,
-            'i' : self.populate_i,
-            'j' : self.populate_j,
-            'k' : self.populate_k,
-            'l' : self.populate_l,
-            'm' : self.populate_m,
-            'n' : self.populate_n,
-            'o' : self.populate_o,
-            'p' : self.populate_p,
-            'q' : self.populate_q,
-            'r' : self.populate_r,
-            's' : self.populate_s,
-            't' : self.populate_t,
-            'u' : self.populate_u,
-            'v' : self.populate_v,
-            'w' : self.populate_w,
-            'x' : self.populate_x,
-            'y' : self.populate_y,
-            'z' : self.populate_z,
-            '1' : self.populate_1,
-            '2' : self.populate_2,
-            '3' : self.populate_3,
-            '4' : self.populate_4,
-            '5' : self.populate_5,
-            '6' : self.populate_6,
-            '7' : self.populate_7,
-            '8' : self.populate_8,
-            '9' : self.populate_9
-        }
+    def populated_at(self, x, y):
 
         old_x = x
 
         populated = []
         for letter in self.word:
-            if letter in letter_map:
-                populated.extend(letter_map[letter](x, y))
-                x += 7
-            elif letter == '\n':
+            if letter == '\n':
                 y -= 7
                 x = old_x
             elif letter == ' ':
                 x += 5
+            else:
+                populated.extend(self._get_populate_method(letter)(x, y))
+                x += 7
 
 
         return populated
