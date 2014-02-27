@@ -787,6 +787,29 @@ class Word(WorldObject):
         
         return populated
 
+    def populate_5(self, x, y):
+        #  #####   
+        #  #  
+        #  ####      
+        #      #  
+        #->####
+        populated = []
+        populate = lambda i, j: populated.append((x + i, y + j, self.color))
+
+        
+        for i in xrange(5):
+
+            if i < 4:
+                populate(i, 2)
+                populate(i, 0)
+
+            populate(i, 4)
+
+        populate(0, 3)
+        populate(4, 1)
+        
+        return populated
+
     #'abcdefghijklmnopqrstuvwxyz
 
     def populated_at(self, x, y):
