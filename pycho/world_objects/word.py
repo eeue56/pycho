@@ -29,6 +29,12 @@ class Word(WorldObject):
     def take_damage(self, damage, world):
         pass
 
+    def populate(self, x, y, list):
+        def func(i, j):
+            list.append((x + i, y + j, self.color))
+
+        return func
+
     def populate_a(self, x, y):
 
         #  #####
@@ -38,8 +44,7 @@ class Word(WorldObject):
         #->#   #
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         middle_x = 2
         middle_y = 2
 
@@ -62,8 +67,7 @@ class Word(WorldObject):
         #->#####
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         middle_x = 2
         middle_y = 2
 
@@ -89,8 +93,7 @@ class Word(WorldObject):
         #->  ###
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         middle_x = 2
         middle_y = 2
 
@@ -115,8 +118,7 @@ class Word(WorldObject):
         #->###
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         middle_x = 2
         middle_y = 2
 
@@ -144,8 +146,7 @@ class Word(WorldObject):
         #->#####
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         middle_x = 2
         middle_y = 2
 
@@ -171,8 +172,7 @@ class Word(WorldObject):
         #->#
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         middle_x = 2
         middle_y = 2
 
@@ -197,8 +197,7 @@ class Word(WorldObject):
         #->#####
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         middle_x = 2
         middle_y = 2
 
@@ -227,8 +226,7 @@ class Word(WorldObject):
         #->#   #
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         middle_x = 2
         middle_y = 2
 
@@ -250,8 +248,7 @@ class Word(WorldObject):
         #->#####
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             if i == 2:
@@ -272,8 +269,7 @@ class Word(WorldObject):
         #->###
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             if i == 3:
@@ -295,8 +291,7 @@ class Word(WorldObject):
         #->#  #
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             if i == 0:
@@ -323,8 +318,7 @@ class Word(WorldObject):
         #->#####
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             if i == 0:
@@ -345,8 +339,7 @@ class Word(WorldObject):
         #->#   #
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             if i == 0 or i == 4:
@@ -371,8 +364,7 @@ class Word(WorldObject):
         #-> ###
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             if i == 0 or i == 4:
@@ -394,8 +386,7 @@ class Word(WorldObject):
         #->#
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             if i == 0:
@@ -419,8 +410,7 @@ class Word(WorldObject):
         #->    #
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             if i == 0:
@@ -444,8 +434,7 @@ class Word(WorldObject):
         #->#   #
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             if i == 0:
@@ -470,8 +459,7 @@ class Word(WorldObject):
         #->#####   
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             
@@ -499,8 +487,7 @@ class Word(WorldObject):
         #->  #   
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             
@@ -522,8 +509,7 @@ class Word(WorldObject):
         #-> ####   
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             
@@ -545,8 +531,7 @@ class Word(WorldObject):
         #->  #   
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             
@@ -570,8 +555,7 @@ class Word(WorldObject):
         #->#   #  
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             
@@ -596,8 +580,7 @@ class Word(WorldObject):
         #->  #   
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             
@@ -621,8 +604,7 @@ class Word(WorldObject):
         #->#####   
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             
@@ -642,8 +624,7 @@ class Word(WorldObject):
         #->#   #   
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             
@@ -667,8 +648,7 @@ class Word(WorldObject):
         #  ## ##   
         #->#   #
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             
@@ -692,8 +672,7 @@ class Word(WorldObject):
         #    #   
         #->#####
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             populate(i, 0)
@@ -715,8 +694,7 @@ class Word(WorldObject):
         #    #   
         #->#####
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         for i in xrange(5):
             populate(i, 0)
@@ -742,8 +720,7 @@ class Word(WorldObject):
         #  #  #  
         #-> ##
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         populate(0, 1)
         populate(0, 3)
@@ -771,8 +748,7 @@ class Word(WorldObject):
         #     #  
         #->   #
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
 
         populate(0, 3)
         populate(0, 4)
@@ -794,8 +770,7 @@ class Word(WorldObject):
         #      #  
         #->####
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         
         for i in xrange(5):
 
@@ -817,8 +792,7 @@ class Word(WorldObject):
         #  #   #  
         #-> ###
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         
         for i in xrange(1, 4):
             populate(i, 0)
@@ -839,8 +813,7 @@ class Word(WorldObject):
         #->#
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         
         for i in xrange(5):
             populate(i, 4)
@@ -865,8 +838,7 @@ class Word(WorldObject):
         #-> ###
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         
         for j in xrange(5):
             if j in (1, 3):
@@ -886,8 +858,7 @@ class Word(WorldObject):
         #-> ####
 
         populated = []
-        populate = lambda i, j: populated.append((x + i, y + j, self.color))
-
+        populate = self.populate(x, y, populated)
         
         for j in xrange(5):
             if j == 1:
