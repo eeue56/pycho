@@ -705,7 +705,34 @@ class Word(WorldObject):
         populate(0, 3)
         populate(1, 4)
             
+        return populated
 
+    def populate_1(self, x, y):
+
+        #   ##   
+        #  #  #
+        #     #      
+        #    #   
+        #->#####
+        populated = []
+        populate = lambda i, j: populated.append((x + i, y + j, self.color))
+
+
+        for i in xrange(5):
+            populate(i, 0)
+
+            if i == 2:
+                for j in xrange(1, 3):
+                    populate(i, j)
+                populate(i, 4)
+
+            if i == 3:
+                for j in xrange(2, 4):
+                    populate(i, j)
+
+        populate(0, 3)
+        populate(1, 4)
+            
         return populated
 
     #'abcdefghijklmnopqrstuvwxyz
@@ -739,7 +766,8 @@ class Word(WorldObject):
             'x' : self.populate_x,
             'y' : self.populate_y,
             'z' : self.populate_z,
-            '1' : self.populate_1
+            '1' : self.populate_1,
+            '2' : self.populate_2
         }
 
         old_x = x
