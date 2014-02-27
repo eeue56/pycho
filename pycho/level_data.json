@@ -27,12 +27,14 @@
             }
         },
         "fixed":{
-            "word":{
-                "render_trousers" : false,
-                "x":15,
-                "y":79,
-                "word" : "hello!\nyou are\n stuck\n1"
-            }
+            "word":[
+                {
+                    "render_trousers" : true,
+                    "x":15,
+                    "y":3,
+                    "word" : "hello!\nyou are\n stuck\n1"
+                }
+            ]
         },
         "random":{
             "old_grumper" : {

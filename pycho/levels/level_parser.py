@@ -22,18 +22,19 @@ def _has_trousers(object_data):
     return True
 
 def _generate_fixed(level, fixed_records):
-    for object_class, object_data in fixed_records.items():
+    for object_class, object_data_list in fixed_records.items():
 
         if object_class not in known_objects:
             logging.warning('no such class as {c}'.format(c=object_class))
             continue
 
-        if not _has_trousers(object_data):
-            continue
+        for object_data in object_data_list:
+            if not _has_trousers(object_data):
+                continue
 
-        if 'color' in object_data:
-            object_data['color'] = color_dict_to_tuple(object_data['color'])
-        level.add_object(known_objects[object_class](**object_data))
+            if 'color' in object_data:
+                object_data['color'] = color_dict_to_tuple(object_data['color'])
+            level.add_object(known_objects[object_class](**object_data))
 
 
 def _generate_random(level, random_records):
