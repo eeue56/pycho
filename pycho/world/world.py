@@ -21,10 +21,12 @@ class World(object):
 
         self.level_controller = level_controller
         self.level_controller.start()
+        self.add_object(self.player)
 
     def add_object(self, *args, **kwargs):
         """ Adds an object to the current level """
         self.level_controller.current_level.add_object(*args, **kwargs)
+
 
     @property
     def floor_color(self):
@@ -202,24 +204,20 @@ class World(object):
         """ Does a tick of the world """
         #TODO: use time-based deltatimes
         for object_ in self.objects:
-            object_.tick(self)
-
-        try:
-            self.player.tick(self)
-        except OutOfWorldException:
-            self._move_to_next_level()
+            try:
+                object_.tick(self)
+            except OutOfWorldException:
+                if object_ is self.player:
+                    self._move_to_next_level()
                     
         for object_ in self.objects:
             if object_.health <= 0:
-                object_.die()
-                self.remove(object_)
-
-
-        ## TODO: kill player
-        if self.player.health <= 0:
-            self.add_object(Word(20, 20, "you died", color=(1, 0, 0)))
-            print("Game over, you died!")
-            
+                if object_ is not self.player:
+                    object_.die()
+                    self.remove(object_)
+                else:
+                    self.add_object(Word(20, 20, "you died", color=(1, 0, 0)))
+                    print("Game over, you died!")
 
     def mind_dump(self):
         """ Dump the mind of all the objects """
