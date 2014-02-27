@@ -707,7 +707,7 @@ class Word(WorldObject):
             
         return populated
 
-    def populate_1(self, x, y):
+    def populate_2(self, x, y):
 
         #   ##   
         #  #  #
