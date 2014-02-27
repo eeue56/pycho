@@ -11,6 +11,7 @@ from pycho.world.helpers import box_around
 
 import logging
 
+xrange = range
 
 class DefaultWindow(QtWidgets.QMainWindow):
     def __init__(self, game, 
@@ -78,16 +79,27 @@ class DefaultWindow(QtWidgets.QMainWindow):
 
     def map_point_to_game_world(self, x, y):
         i = int((x / self.widget.width) * self.game.world.width)
-        j = int((y / self.widget.height) * self.game.world.height)
+        j = int(((self.widget.height - y) / self.widget.height) * self.game.world.height)
         return (i, j)
 
     def _defaultMousePressHandler(self, event, pointer_size=5):
         x, y = self.map_point_to_game_world(event.x(), event.y())
 
-        obj = self.game.world.colliding_object(None, 
-            box_around(x, y, pointer_size, pointer_size))
+        logging.error(x)
+        logging.error(y)
 
-        logging.error(obj)
+        for j in xrange(pointer_size):
+            try:
+                obj = self.game.world.colliding_object(None, 
+                    box_around(x, y, j, j))
+            except:
+                break
+
+            if obj is not None:
+                logging.error(obj)
+                break
+        else:
+            logging.error("Nothing found!")
 
     def keyPressEvent(self, event):
         self.key_press_handler(self, event)

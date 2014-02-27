@@ -18,6 +18,7 @@ if __name__ == '__main__':
 
     player = Player(50, 50, COLORS['white'], DIRECTIONS['up'], speed=2)
 
+
     with open('level_data.json') as f:
         levels = generate_objects(f.read())
 
