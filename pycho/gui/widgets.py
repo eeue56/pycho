@@ -18,7 +18,7 @@ class GLPlotWidget(QGLWidget):
         """Initialize OpenGL, VBOs, upload data on the GPU, etc.
         """
         # background color
-        gl.glClearColor(0,0,0,0)
+        gl.glClearColor(0, 0, 1, 1)
         gl.glViewport(0, 0, self.width, self.height)
         gl.glMatrixMode(gl.GL_PROJECTION)
         gl.glLoadIdentity()
