@@ -69,6 +69,8 @@ class WorldObject(object):
         pass
 
     def _debug_draw(self):
+        """ Draw used for debugging. Allows you to draw pixel by pixel 
+            in the form of blocks without using sections """
         if (self.x, self.y, self.facing) not in self._section_cache:
             self._section_cache[(self.x, self.y, self.facing)] = into_sections(self.populated_squares)
 
@@ -104,14 +106,19 @@ class WorldObject(object):
 
     @Action("taking damage", class_watch=['_last_hit_by'])
     def take_damage(self, damage, other):
+        """ Take a certain amount of damage dealt by other 
+            Stores oher in the _last_hit_by variable for
+            later inspection"""
         self.health -= damage
         self._last_hit_by = other
 
     def deal_damage(self, other):
+        """ Deal some damage to other """
         pass
 
     @Action("Moving", watch={1 : 'facing', 2 : 'distance'})
     def move(self, world, facing, distance=1):
+        """ Move in the direction the object is facing """
         if facing == DIRECTIONS['still']:
             return
         world.move_in_direction(self, facing, distance)
@@ -146,5 +153,3 @@ class WorldObject(object):
                 smallest = (x, y)
                 small_score = score
         return smallest
-
-
