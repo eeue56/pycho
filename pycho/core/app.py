@@ -24,21 +24,24 @@ def application(level_file,
 
     logging.getLogger().setLevel(logging.ERROR)
 
-    if player_options is None:
-        player_options = {}
 
-    if player_color is None:
-        player_color = COLORS['white']
-
-    if player_direction is None:
-        player_direction = DIRECTIONS['up']
-
-
-    player = Player(player_x, player_y, 
-        player_color, player_direction, **player_options)
 
     with open(level_file) as f:
-        levels = generate_objects(f.read())
+        levels, player = generate_objects(f.read())
+
+
+    if player is None:
+        if player_options is None:
+            player_options = {}
+
+        if player_color is None:
+            player_color = COLORS['white']
+
+        if player_direction is None:
+            player_direction = DIRECTIONS['up']
+        player = Player(player_x, player_y, 
+            player_color, player_direction, **player_options)
+
 
     level_controller = LevelController(levels)
     world = World(player, level_controller)

@@ -11,6 +11,7 @@ from pycho.world_objects.old_grumper import *
 from pycho.world_objects.player import *
 
 known_objects = {
+    'player' : Player,
     'bomb' : Bomb,
     'wall' : Wall,
     'old_grumper' : OldGrumper,

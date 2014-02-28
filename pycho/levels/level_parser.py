@@ -22,8 +22,9 @@ def _has_trousers(object_data):
     return True
 
 def _generate_fixed(level, fixed_records):
-    for object_class, object_data_list in fixed_records.items():
+    player = None
 
+    for object_class, object_data_list in fixed_records.items():
         if object_class not in known_objects:
             logging.warning('no such class as {c}'.format(c=object_class))
             continue
@@ -34,7 +35,12 @@ def _generate_fixed(level, fixed_records):
 
             if 'color' in object_data:
                 object_data['color'] = color_dict_to_tuple(object_data['color'])
-            level.add_object(known_objects[object_class](**object_data))
+            obj_ = known_objects[object_class](**object_data)
+            level.add_object(obj_)
+
+            if object_class == 'player':
+                player = obj_
+    return player
 
 
 def _generate_random(level, random_records):
@@ -93,6 +99,8 @@ def generate_objects(file_data):
 
     logging.debug("Loading {x} levels from level_data.json!".format(x=len(data)))
 
+    player = None
+
     for level_id, level_data in data.items():
         world_width = level_data['width']
         world_height = level_data['height']
@@ -108,7 +116,7 @@ def generate_objects(file_data):
         level.add_objects(walls)
 
         if 'fixed' in level_data:
-            _generate_fixed(level, level_data['fixed'])
+            player = _generate_fixed(level, level_data['fixed'])
 
         if 'random' in level_data:
             _generate_random(level, level_data['random'])
@@ -123,7 +131,7 @@ def generate_objects(file_data):
             y=len(data))
 
 
-    return level_dict
+    return (level_dict, player)
 
 
 

@@ -27,6 +27,16 @@
             }
         },
         "fixed":{
+            "player" : [{
+                "x" : 50,
+                "y" : 50,
+                "color" : {
+                    "r" : 0,
+                    "g" : 0,
+                    "b" : 1
+                },
+                "facing" : 1
+            }],
             "word":[
                 {
                     "render_trousers" : false,
