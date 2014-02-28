@@ -54,17 +54,16 @@ class Wall(WorldObject):
             if y > max_y:
                 max_y = y
 
+            if x < min_x:
+                min_x = x
+            if y < min_y:
+                min_y = y
+
         if max_x < min_x:
             max_x, min_x = min_x, max_x
 
         if max_y < min_y:
             max_y, min_y = min_y, max_y
-
-        print('Facing: ', self.facing)
-        print('Min x:', min_x)
-        print('Min y:', min_y)
-        print('Max x:', max_x)
-        print('Max y:', max_y)
 
         return (min_x, min_y, max_x - min_x, max_y - min_y)
 
