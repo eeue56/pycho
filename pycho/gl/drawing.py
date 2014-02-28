@@ -2,6 +2,8 @@ import OpenGL.GL as gl
 from numpy import array, float32
 from OpenGL.arrays.vbo import VBO
 
+import logging
+
 def draw_square(x, y, x_size=1, y_size=1):
     """ Draw a square of given location and size """
     gl.glRectf(x, y, x + x_size, y + y_size)
@@ -26,11 +28,11 @@ def draw_vbo(vbo, offset=0, number=6):
             gl.glVertexPointerf(vbo)
             gl.glDrawArrays(gl.GL_TRIANGLES, offset, number, None)
         except Exception:
-            print('failed to draw')
+            logging.error('failed to draw')
         finally:
             vbo.unbind()
             gl.glDisableClientState(gl.GL_VERTEX_ARRAY)
     except Exception:
-        print('failed to bind')
+        logging.error('failed to bind')
     finally:
         pass
