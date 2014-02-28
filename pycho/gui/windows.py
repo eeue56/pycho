@@ -5,7 +5,7 @@ from PyQt5 import QtCore, QtWidgets
 from pycho.gui.widgets import GLPlotWidget
 from pycho.world.navigation import DIRECTIONS
 
-from pycho.gui.interaction import KEYS
+from pycho.gui.interaction import QT_KEYS
 
 from pycho.world.helpers import box_around
 
@@ -23,7 +23,7 @@ class DefaultWindow(QtWidgets.QMainWindow):
         self.game = game
         
         self.widget = GLPlotWidget(100, 100, self.game)
-        self.keys = set()
+        self.QT_keys = set()
 
         self.widget.setGeometry(0, 0, self.widget.width, self.widget.height)
         self.setCentralWidget(self.widget)
@@ -61,15 +61,15 @@ class DefaultWindow(QtWidgets.QMainWindow):
     def _defaultKeyPressHandler(self, event):
         key = event.key()
 
-        if key == KEYS['A']:
+        if key == QT_KEYS['A']:
             face_movement = DIRECTIONS['left']
-        elif key == KEYS['D']:
+        elif key == QT_KEYS['D']:
             face_movement = DIRECTIONS['right']
-        elif key == KEYS['W']:
+        elif key == QT_KEYS['W']:
             face_movement = DIRECTIONS['up']
-        elif key == KEYS['S']:
+        elif key == QT_KEYS['S']:
             face_movement = DIRECTIONS['down']
-        elif key == KEYS['Space']: 
+        elif key == QT_KEYS['Space']: 
             face_movement = DIRECTIONS['still']
         else:
             return
