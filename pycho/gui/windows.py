@@ -85,9 +85,6 @@ class DefaultWindow(QtWidgets.QMainWindow):
     def _defaultMousePressHandler(self, event, pointer_size=5):
         x, y = self.map_point_to_game_world(event.x(), event.y())
 
-        logging.error(x)
-        logging.error(y)
-
         for j in xrange(pointer_size):
             try:
                 obj = self.game.world.colliding_object(None, 
