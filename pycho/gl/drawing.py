@@ -58,19 +58,19 @@ def draw_color_vbo(vbo, offset=0, number=6):
             gl.glEnableClientState(gl.GL_VERTEX_ARRAY)
             gl.glEnableClientState(gl.GL_COLOR_ARRAY)
 
-            gl.glVertexPointerf(3, gl.GL_FLOAT, 24, vbo)
+            gl.glVertexPointer(3, gl.GL_FLOAT, 24, vbo)
             gl.glColorPointer(3, gl.GL_FLOAT, 24, vbo + 12)
 
             gl.glDrawArrays(gl.GL_TRIANGLES, offset, number, None)
 
-        except Exception:
-            logging.error('failed to draw')
+        except Exception as e:
+            logging.error('failed to draw', e)
         finally:
             vbo.unbind()
             gl.glDisableClientState(gl.GL_VERTEX_ARRAY)
             gl.glDisableClientState(gl.GL_COLOR_ARRAY)
-    except Exception:
-        logging.error('failed to bind')
+    except Exception as e:
+        logging.error('failed to bind', e)
     finally:
         pass
 

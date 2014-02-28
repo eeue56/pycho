@@ -5,7 +5,8 @@ from pycho.world.navigation import DIRECTIONS
 
 from pycho.gl.color import COLORS
 
-from pycho.gl.drawing import generate_rectangle_vbo, draw_vbo
+from pycho.core.blocking import into_sections
+from pycho.gl.drawing import sectioned_vbo, draw_color_vbo
 
 import OpenGL.GL as gl
 
@@ -37,7 +38,8 @@ class Wall(WorldObject):
         self.height = 2
         self.health = 1
 
-        self.vbo = generate_rectangle_vbo(*self.vbo_points())
+        self.vbo, self.number_of_points = sectioned_vbo(
+            into_sections(self.populated_squares))
 
     def vbo_points(self):
         populated = self.populated_at()
@@ -78,10 +80,7 @@ class Wall(WorldObject):
 
         gl.glPushMatrix()
 
-
-        r, g, b = self.color
-        gl.glColor3f(r, g, b)
-        draw_vbo(self.vbo)
+        draw_color_vbo(self.vbo, number=self.number_of_points)
 
         gl.glPopMatrix() 
 
