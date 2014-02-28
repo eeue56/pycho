@@ -5,6 +5,7 @@ from pycho.world.navigation import DIRECTIONS
 
 from pycho.gl.color import COLORS
 
+
 try:
     xrange(1)
 except NameError:
