@@ -22,7 +22,9 @@ class DefaultWindow(QtWidgets.QMainWindow):
         key_press_handler=None, 
         mouse_click_handler=None,
         mouse_release_handler=None,
-        tick_time=0):
+        tick_time=0,
+        width=600,
+        height=400):
         super(DefaultWindow, self).__init__()
 
         self.game = game
@@ -48,7 +50,7 @@ class DefaultWindow(QtWidgets.QMainWindow):
         if tick_time != TURN_BASED:
             self.tick_timer.start(tick_time, self)
 
-        self.resize(600, 400)
+        self.resize(width, height)
 
 
         if key_press_handler is None:
