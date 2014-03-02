@@ -15,7 +15,7 @@ except:
     readme = None
 
 setup(name='pycho',
-      version='0.0.1',
+      version='0.0.3',
       description='A game engine for Python 2 and 3 with built in AI',
       long_description=readme,
       license=license,
@@ -23,5 +23,5 @@ setup(name='pycho',
       author='Enalicho',
       author_email='enalicho@gmail.com',
       packages=find_packages(),
-      requires=['PyQt', 'OpenGL'],
+      requires=['PyQt', 'OpenGL', 'numpy'],
 )
