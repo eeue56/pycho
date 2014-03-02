@@ -21,12 +21,11 @@ class World(object):
 
         self.level_controller = level_controller
         self.level_controller.start()
-        self.add_object(self.player)
+        #self.add_object(self.player)
 
     def add_object(self, *args, **kwargs):
         """ Adds an object to the current level """
         self.level_controller.current_level.add_object(*args, **kwargs)
-
 
     @property
     def floor_color(self):
@@ -165,8 +164,6 @@ class World(object):
                 else:
                     if self.is_near_player(object_):
                         object_.draw()
-
-        self.player.draw()
 
     def _move_player_into_gap(self, direction):
         """ Places the player in the door way of the level """
