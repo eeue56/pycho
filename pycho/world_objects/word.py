@@ -445,8 +445,9 @@ class Word(WorldObject):
                 populate(i, 0)
             else:
                 populate(i, 2)
-                populate(i, 4)      
+                populate(i, 4)   
 
+        populate(3, 1)
 
         return populated
 
