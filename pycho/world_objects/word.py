@@ -876,6 +876,26 @@ class Word(WorldObject):
 
         return populated
 
+    def populate_0(self, x, y):
+        #   ###   
+        #  #   #
+        #  #   #      
+        #  #   #
+        #-> ###
+
+        populated = []
+        populate = self.populate(x, y, populated)
+        
+        for i in xrange(5):
+            if i in (0, 4):
+                for j in xrange(1, 4):
+                    populate(i, j)
+            else:
+                populate(i, 0)
+                populate(i, 4) 
+
+        return populated
+
 
     #'abcdefghijklmnopqrstuvwxyz
 
