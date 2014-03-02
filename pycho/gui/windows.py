@@ -12,12 +12,14 @@ from pycho.world.helpers import box_around
 import logging
 
 xrange = range
+TURN_BASED = 0
 
 class DefaultWindow(QtWidgets.QMainWindow):
     def __init__(self, game, 
         key_press_handler=None, 
         mouse_click_handler=None,
-        mouse_release_handler=None):
+        mouse_release_handler=None,
+        tick_time=0):
         super(DefaultWindow, self).__init__()
 
         self.game = game
@@ -30,14 +32,18 @@ class DefaultWindow(QtWidgets.QMainWindow):
         self.show()
 
         self.paint_timer = QtCore.QBasicTimer()
-
         self.clean_timer = QtCore.QBasicTimer()
 
-        self.callbacks = [self.widget.updateGL, self.game.world.clean_up]
+        self.tick_timer = QtCore.QBasicTimer()
+
+        self.callbacks = [self.widget.updateGL, self.game.world.clean_up, self.game.world.tick]
         QtCore.QMetaObject.connectSlotsByName(self)
         
         self.paint_timer.start(30, self)
         self.clean_timer.start(40, self)
+
+        if tick_time != TURN_BASED:
+            self.tick_timer.start(tick_time, self)
 
         self.resize(600, 400)
 
