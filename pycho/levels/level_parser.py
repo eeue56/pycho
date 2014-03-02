@@ -108,12 +108,17 @@ def generate_objects(file_data):
 
         is_first = level_data['is_first'] if 'is_first' in level_data else False
 
-
-        wall_dict, walls = _generate_walls(world_width, 
-            world_height, level_data['walls'])
+        if 'walls' in level_data:
+            wall_dict, walls = _generate_walls(world_width, 
+                world_height, level_data['walls'])
+        else:
+            walls = None
+            wall_dict = {}
 
         level = Level(color, wall_dict, world_width, world_height, is_first=is_first)
-        level.add_objects(walls)
+        
+        if walls is not None:
+            level.add_objects(walls)
 
         if 'fixed' in level_data:
             player = _generate_fixed(level, level_data['fixed'])
