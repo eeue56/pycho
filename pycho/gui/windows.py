@@ -14,6 +14,9 @@ import logging
 xrange = range
 TURN_BASED = 0
 
+#Qt uses camelCase for naming methods, 
+#hence why they are used here
+
 class DefaultWindow(QtWidgets.QMainWindow):
     def __init__(self, game, 
         key_press_handler=None, 
@@ -91,6 +94,8 @@ class DefaultWindow(QtWidgets.QMainWindow):
     def _defaultMousePressHandler(self, event, pointer_size=5):
         x, y = self.map_point_to_game_world(event.x(), event.y())
 
+        # gradually grow the pointer to be bigger to 
+        # allow for a greater control on what is clicked
         for j in xrange(pointer_size):
             try:
                 obj = self.game.world.colliding_object(None, 
