@@ -47,8 +47,14 @@ class DefaultWindow(QtWidgets.QMainWindow):
         self.paint_timer.start(30, self)
         self.clean_timer.start(40, self)
 
+        self.timers = [self.paint_timer, self.clean_timer]
+        self.timer_times = [30, 40]
+
         if tick_time != TURN_BASED:
             self.tick_timer.start(tick_time, self)
+
+            self.timers.append(self.tick_timer)
+            self.timer_times.append(tick_time)
 
         self.resize(width, height)
 
@@ -65,6 +71,7 @@ class DefaultWindow(QtWidgets.QMainWindow):
         self.key_press_handler = key_press_handler
         self.mouse_click_handler = mouse_click_handler
         self.mouse_release_handler = mouse_release_handler
+        self.is_paused = False
 
     def timerEvent(self, event):
         self.callbacks[event.timerId() - 1]()
@@ -110,6 +117,16 @@ class DefaultWindow(QtWidgets.QMainWindow):
                 break
         else:
             logging.error("Nothing found!")
+
+    def pause(self):
+        for timer in self.timers:
+            self.timers.stop()
+        self.is_paused = True
+
+    def unpause(self):
+        for timer, time in zip(self.timers, self.timer_times):
+            self.timers.start(time)
+        self.is_paused = False
 
     def keyPressEvent(self, event):
         self.key_press_handler(self, event)
