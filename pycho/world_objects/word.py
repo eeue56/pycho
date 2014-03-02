@@ -889,7 +889,7 @@ class Word(WorldObject):
         old_x = x
 
         populated = []
-        for letter in self.word:
+        for letter in self.word.lower():
             if letter == '\n':
                 y -= 7
                 x = old_x
