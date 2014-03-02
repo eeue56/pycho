@@ -35,8 +35,6 @@ class GLPlotWidget(QGLWidget):
         r, g, b = self.game.world.floor_color
         gl.glClearColor(r, g, b, 1)
         gl.glClear(gl.GL_COLOR_BUFFER_BIT)
-        
-        gl.glEnableClientState(gl.GL_VERTEX_ARRAY)
 
         self.game.world.draw()
         
