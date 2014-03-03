@@ -122,11 +122,11 @@ class Word(WorldObject):
         middle_x = 2
         middle_y = 2
 
-        for i in xrange(5):
-            if i < 1:
-                for j in xrange(5):
-                    populate(i, j)
-            elif i < 3:
+        for j in xrange(5):
+            populate(0, j)
+
+        for i in xrange(1, 5):
+            if i < 3:
                 populate(i, 0)
                 populate(i, 4)
             elif i < 4:
@@ -150,10 +150,10 @@ class Word(WorldObject):
         middle_x = 2
         middle_y = 2
 
-        for i in xrange(5):
-            if i < 1:
-                for j in xrange(5):
-                    populate(i, j)
+        for j in xrange(5):
+            populate(0, j)
+
+        for i in xrange(1, 5):
             
             populate(i, 0)
             populate(i, 4)
@@ -176,11 +176,10 @@ class Word(WorldObject):
         middle_x = 2
         middle_y = 2
 
-        for i in xrange(5):
-            if i < 1:
-                for j in xrange(5):
-                    populate(i, j)
+        for j in xrange(1, 5):
+            populate(0, j)
 
+        for i in xrange(1, 5):
             populate(i, 4)
             
             if i < 4:
@@ -201,19 +200,15 @@ class Word(WorldObject):
         middle_x = 2
         middle_y = 2
 
-        for i in xrange(5):
-            if i < 1:
-                for j in xrange(5):
-                    populate(i, j)
+        for j in xrange(5):
+            populate(0, j)
 
+        for i in xrange(1, 5):
             populate(i, 0)
+            populate(i, 2)
             populate(i, 4)
-            
-            if i > 1:
-                populate(i, 2)
 
-            if i == 4:
-                populate(i, 1)
+        populate(4, 1)
 
         return populated
 
@@ -249,11 +244,11 @@ class Word(WorldObject):
 
         populated = []
         populate = self.populate(x, y, populated)
+        
+        for j in xrange(5):
+            populate(2, j)
 
         for i in xrange(5):
-            if i == 2:
-                for j in xrange(5):
-                    populate(i, j)
 
             populate(i, 0)
             populate(i, 4)
@@ -271,11 +266,10 @@ class Word(WorldObject):
         populated = []
         populate = self.populate(x, y, populated)
 
-        for i in xrange(5):
-            if i == 3:
-                for j in xrange(5):
-                    populate(i, j)
+        for j in xrange(5):
+            populate(3, j)
 
+        for i in xrange(5):
             if i < 3:
                 populate(i, 0)
             populate(i, 4)
@@ -292,20 +286,16 @@ class Word(WorldObject):
 
         populated = []
         populate = self.populate(x, y, populated)
+                
+        for j in xrange(5):
+            populate(0, j)
 
-        for i in xrange(5):
-            if i == 0:
-                for j in xrange(5):
-                    populate(i, j)
-            elif i == 1:
-                populate(i, 2)
-            elif i == 2:
-                populate(i, 1)
-                populate(i, 3)
-            elif i == 3:
-                populate(i, 0)
-                populate(i, 4)
+        populate(1, 2)
+        populate(2, 1)
+        populate(2, 3)
 
+        populate(3, 0)
+        populate(3, 4)
 
         return populated
 
@@ -320,13 +310,11 @@ class Word(WorldObject):
         populated = []
         populate = self.populate(x, y, populated)
 
-        for i in xrange(5):
-            if i == 0:
-                for j in xrange(5):
-                    populate(i, j)
-            populate(i, 0)
-               
+        for j in xrange(5):
+            populate(0, j)
 
+        for i in xrange(1, 5):
+            populate(i, 0)
 
         return populated
 
@@ -341,17 +329,13 @@ class Word(WorldObject):
         populated = []
         populate = self.populate(x, y, populated)
 
-        for i in xrange(5):
-            if i == 0 or i == 4:
-                for j in xrange(5):
-                    populate(i, j)
-            elif i == 1:
-                populate(i, 3)
-            elif i == 2:
-                populate(i, 2)
-            elif i == 3:
-                populate(i, 1)              
+        for i in (0, 4):
+            for j in xrange(5):
+                populate(i, j)
 
+        populate(1, 3)
+        populate(2, 2)
+        populate(3, 1)
 
         return populated
 
@@ -367,12 +351,12 @@ class Word(WorldObject):
         populate = self.populate(x, y, populated)
 
         for i in xrange(5):
-            if i == 0 or i == 4:
+            if i in (0, 4):
                 for j in xrange(1, 4):
                     populate(i, j)
             else:
                 populate(i, 0)
-                populate(i, 4)          
+                populate(i, 4)
 
 
         return populated
@@ -388,11 +372,11 @@ class Word(WorldObject):
         populated = []
         populate = self.populate(x, y, populated)
 
-        for i in xrange(5):
-            if i == 0:
-                for j in xrange(5):
-                    populate(i, j)
-            elif i < 4:
+        for j in xrange(5):
+            populate(0, j)
+
+        for i in xrange(1, 5):
+            if i < 4:
                 populate(i, 2)
                 populate(i, 4)
             else:
@@ -411,17 +395,15 @@ class Word(WorldObject):
 
         populated = []
         populate = self.populate(x, y, populated)
+        
+        populate(0, 3)
 
-        for i in xrange(5):
-            if i == 0:
-                populate(i, 3)
-            elif i == 4:
-                for j in xrange(5):
-                    populate(i, j)
-            elif i < 4:
+        for j in xrange(5):
+            populate(4, j)
+
+        for i in xrange(4):
                 populate(i, 2)
-                populate(i, 4)      
-
+                populate(i, 4)
 
         return populated
 
@@ -435,17 +417,16 @@ class Word(WorldObject):
 
         populated = []
         populate = self.populate(x, y, populated)
+        
+        for j in xrange(5):
+            populate(0, j)
+        
+        populate(4, 3)
+        populate(4, 0)
 
-        for i in xrange(5):
-            if i == 0:
-                for j in xrange(5):
-                    populate(i, j)
-            elif i == 4:
-                populate(i, 3)
-                populate(i, 0)
-            else:
-                populate(i, 2)
-                populate(i, 4)   
+        for i in xrange(1,4):
+            populate(i, 2)
+            populate(i, 4)
 
         populate(3, 1)
 
@@ -490,13 +471,11 @@ class Word(WorldObject):
         populated = []
         populate = self.populate(x, y, populated)
 
+        for j in xrange(5):
+            populate(2, j)
+        
         for i in xrange(5):
-            
-            if i == 2:
-                for j in xrange(5):
-                    populate(i, j)
-            else:
-                populate(i, 4)
+            populate(i, 4)
 
 
         return populated
