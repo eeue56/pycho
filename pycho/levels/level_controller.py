@@ -4,7 +4,6 @@ class LevelController(object):
 
     def __init__(self, levels, first=None):
 
-        self.current_level = None
         self.levels = levels
 
         if first is None:

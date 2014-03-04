@@ -115,7 +115,7 @@ def generate_objects(file_data):
             walls = None
             wall_dict = {}
 
-        level = Level(color, wall_dict, world_width, world_height, is_first=is_first)
+        level = Level(color, wall_dict, world_width, world_height, is_first=is_first, level_id=level_id)
         
         if walls is not None:
             level.add_objects(walls)

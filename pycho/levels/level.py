@@ -15,6 +15,7 @@ class Level(object):
         walls, 
         width, 
         height, 
+        level_id=None,
         objects=None, 
         is_first=None):
         self.color = color
@@ -33,6 +34,11 @@ class Level(object):
 
         if is_first is None:
             is_first = False
+
+        if level_id is None:
+            level_id = '*'
+
+        self.id = level_id
         self.is_first = is_first
 
     def _clean_remains(self, populated):
