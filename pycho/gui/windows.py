@@ -121,7 +121,7 @@ class DefaultWindow(QtWidgets.QMainWindow):
             except KeyError:
                 logging.error('No default handler set as *!')
 
-        return handlers['level_id']
+        return handlers[level_id]
 
     def _defaultMousePressHandler(self, event, pointer_size=5):
         x, y = self.map_point_to_game_world(event.x(), event.y())
