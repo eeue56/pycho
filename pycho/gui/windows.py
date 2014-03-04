@@ -116,7 +116,10 @@ class DefaultWindow(QtWidgets.QMainWindow):
         level_id = self.game.world.current_level.id
 
         if level_id not in handlers:
-            return handlers['*']
+            try:
+                return handlers['*']
+            except KeyError:
+                logging.error('No default handler set as *!')
 
         return handlers['level_id']
 
