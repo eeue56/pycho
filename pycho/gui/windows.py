@@ -24,13 +24,15 @@ class DefaultWindow(QtWidgets.QMainWindow):
         mouse_release_handler=None,
         tick_time=0,
         width=600,
-        height=400):
+        height=400,
+        key_press_handlers=None,
+        mouse_click_handlers=None,
+        mouse_release_handlers=None):
         super(DefaultWindow, self).__init__()
 
         self.game = game
         
         self.widget = GLPlotWidget(100, 100, self.game)
-        self.QT_keys = set()
 
         self.widget.setGeometry(0, 0, self.widget.width, self.widget.height)
         self.setCentralWidget(self.widget)
@@ -67,10 +69,20 @@ class DefaultWindow(QtWidgets.QMainWindow):
 
         if mouse_release_handler is None:
             mouse_release_handler = lambda *a, **kw: None
+    
+        if key_press_handlers is None:
+            key_press_handlers = {'*' : key_press_handler}
 
-        self.key_press_handler = key_press_handler
-        self.mouse_click_handler = mouse_click_handler
-        self.mouse_release_handler = mouse_release_handler
+        if mouse_click_handlers is None:
+            mouse_click_handlers = {'*' : mouse_click_handler}
+
+        if mouse_release_handlers is None:
+            mouse_release_handlers = {'*' : mouse_release_handler}
+
+        self.key_press_handlers = key_press_handlers
+        self.mouse_click_handlers = mouse_click_handlers
+        self.mouse_release_handlers = mouse_release_handlers
+
         self.is_paused = False
 
     def timerEvent(self, event):
@@ -99,6 +111,14 @@ class DefaultWindow(QtWidgets.QMainWindow):
         i = int((x / self.widget.width) * self.game.world.width)
         j = int(((self.widget.height - y) / self.widget.height) * self.game.world.height)
         return (i, j)
+
+    def _current_handler(self, handlers):
+        level_id = self.game.world.current_level.id
+
+        if level_id not in handlers:
+            return handlers['*']
+
+        return handlers['level_id']
 
     def _defaultMousePressHandler(self, event, pointer_size=5):
         x, y = self.map_point_to_game_world(event.x(), event.y())
@@ -129,13 +149,13 @@ class DefaultWindow(QtWidgets.QMainWindow):
         self.is_paused = False
 
     def keyPressEvent(self, event):
-        self.key_press_handler(self, event)
+        self._current_handler(self.key_press_handlers)(self, event)
 
     def mousePressEvent(self, event):
-        self.mouse_click_handler(self, event)
+        self._current_handler(self.mouse_click_handlers)(self, event)
 
     def mouseReleaseEvent(self, event):
-        self.mouse_release_handler(self, event)
+        self._current_handler(self.mouse_release_handlers)(self, event)
 
     def closeEvent(self, event):
         logging.debug("Dumping to text file")
