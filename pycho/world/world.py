@@ -21,7 +21,6 @@ class World(object):
 
         self.level_controller = level_controller
         self.level_controller.start()
-        #self.add_object(self.player)
 
     def add_object(self, *args, **kwargs):
         """ Adds an object to the current level """

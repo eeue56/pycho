@@ -15,16 +15,12 @@ import sys
 
 
 
-def application(level_file, 
+def load_game(level_file,
     player_x, 
     player_y, 
     player_color=None, 
     player_direction=None, 
     player_options=None):
-
-    logging.getLogger().setLevel(logging.ERROR)
-
-
 
     with open(level_file) as f:
         levels, player = generate_objects(f.read())
@@ -46,6 +42,24 @@ def application(level_file,
     level_controller = LevelController(levels)
     world = World(player, level_controller)
     game = Game(player, world)
+
+    return game
+
+def application(level_file, 
+    player_x, 
+    player_y, 
+    player_color=None, 
+    player_direction=None, 
+    player_options=None):
+
+    logging.getLogger().setLevel(logging.ERROR)
+
+    game = load_game(level_file, 
+        player_x, 
+        player_y, 
+        player_color, 
+        player_direction,
+        player_options)
 
     app = App(sys.argv)
     window = DefaultWindow(game)
