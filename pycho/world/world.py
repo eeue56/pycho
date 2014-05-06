@@ -1,6 +1,6 @@
 from __future__ import division, print_function
 
-from pycho.world_exceptions import *
+from pycho.world.world_exceptions import *
 
 from pycho.world.navigation import DIRECTIONS, MOVEMENTS, opposite_direction
 
