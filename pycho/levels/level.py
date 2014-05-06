@@ -1,4 +1,4 @@
-from pycho.world_exceptions import *
+from pycho.world.world_exceptions import *
 
 from pycho.levels.helpers import color_tuple_to_dict
 from json import dumps

@@ -2,7 +2,7 @@ from __future__ import division
 
 from pycho.world_objects import WorldObject
 from pycho.world.navigation import DIRECTIONS, opposite_direction
-from pycho.world_exceptions import *
+from pycho.world.world_exceptions import *
 
 from pycho.gl.color import COLORS
 

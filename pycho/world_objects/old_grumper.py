@@ -1,8 +1,7 @@
 from __future__ import division
 
 from pycho.world_objects import WorldObject, Bomb
-from pycho.misc import *
-from pycho.world_exceptions import *
+from pycho.world.world_exceptions import *
 
 from pycho.hivemind import Action
 
