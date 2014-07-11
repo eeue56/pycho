@@ -1,4 +1,5 @@
 from json import dumps, loads
+from copy import deepcopy
 
 from random import choice, randint
 
@@ -14,6 +15,21 @@ try:
     xrange(1)
 except NameError:
     xrange = range
+
+# level defaults
+# TODO: Move out to file.
+DEFAULT_LEVEL_VALUES = {
+    'width' : 100,
+    'height' : 100,
+    'color' : { 'r' : 0,
+                'g' : 0,
+                'b' : 0
+    },
+    'is_first' : False,
+    'fixed' : {},
+    'random' : {},
+    'walls' : {}
+}
 
 
 def _has_trousers(object_data):
@@ -102,29 +118,27 @@ def generate_objects(file_data):
     player = None
 
     for level_id, level_data in data.items():
+        defaults = deepcopy(DEFAULT_LEVEL_VALUES)
+        defaults.update(level_data)
+        level_data = defaults
+
         world_width = level_data['width']
         world_height = level_data['height']
         color = color_dict_to_tuple(level_data['color'])
 
-        is_first = level_data['is_first'] if 'is_first' in level_data else False
+        is_first = level_data['is_first']
 
-        if 'walls' in level_data:
-            wall_dict, walls = _generate_walls(world_width, 
-                world_height, level_data['walls'])
-        else:
-            walls = None
-            wall_dict = {}
+        wall_dict, walls = _generate_walls(world_width, 
+            world_height, level_data['walls'])
 
         level = Level(color, wall_dict, world_width, world_height, is_first=is_first, level_id=level_id)
         
-        if walls is not None:
+        if walls:
             level.add_objects(walls)
 
-        if 'fixed' in level_data:
-            player = _generate_fixed(level, level_data['fixed'])
+        player = _generate_fixed(level, level_data['fixed'])
 
-        if 'random' in level_data:
-            _generate_random(level, level_data['random'])
+        _generate_random(level, level_data['random'])
 
         level_dict[level_id] = level
 
@@ -137,8 +151,3 @@ def generate_objects(file_data):
 
 
     return (level_dict, player)
-
-
-
-
-
