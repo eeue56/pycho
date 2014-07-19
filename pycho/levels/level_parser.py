@@ -122,6 +122,27 @@ def _load_defaults(default_dict, level_data):
     defaults.update(level_data)
     return defaults
 
+
+def load_level(level_id, level_data):
+    world_width = level_data['width']
+    world_height = level_data['height']
+    color = color_dict_to_tuple(level_data['color'])
+
+    is_first = level_data['is_first']
+
+    wall_dict, walls = _generate_walls(world_width, 
+        world_height, level_data['walls'])
+
+    level = Level(color, wall_dict, world_width, world_height, is_first=is_first, level_id=level_id)
+    
+    if walls:
+        level.add_objects(walls)
+
+    _player = _generate_fixed(level, level_data['fixed'])
+    _generate_random(level, level_data['random'])
+
+    return level, _player
+
 def generate_objects(file_data, defaults_filename=None):
 
     defaults = load_defaults_from_file(defaults_filename)
@@ -138,28 +159,11 @@ def generate_objects(file_data, defaults_filename=None):
     for level_id, level_data in data.items():
         level_data = default_loader(level_data)
 
-        world_width = level_data['width']
-        world_height = level_data['height']
-        color = color_dict_to_tuple(level_data['color'])
-
-        is_first = level_data['is_first']
-
-        wall_dict, walls = _generate_walls(world_width, 
-            world_height, level_data['walls'])
-
-        level = Level(color, wall_dict, world_width, world_height, is_first=is_first, level_id=level_id)
-        
-        if walls:
-            level.add_objects(walls)
-
-        _player = _generate_fixed(level, level_data['fixed'])
+        level, _player = load_level(level_id, level_data)
+        level_dict[level_id] = level
 
         if _player is not None:
             player = _player
-
-        _generate_random(level, level_data['random'])
-
-        level_dict[level_id] = level
 
     if len(data) == len(level_dict):
         logging.debug("All levels loaded correctly.")
