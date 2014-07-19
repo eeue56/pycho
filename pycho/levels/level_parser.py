@@ -36,8 +36,10 @@ def load_defaults_from_file(filename=None):
 
     try:
         with open(filename) as f:
+            logging.debug('Reading defaults from {}'.format(filename))
             return loads(f.read())
     except IOError:
+        logging.debug('Using hardcoded defaults')
         return DEFAULT_LEVEL_VALUES
 
 def _has_trousers(object_data):
