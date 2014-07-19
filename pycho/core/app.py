@@ -50,9 +50,10 @@ def application(level_file,
     player_y, 
     player_color=None, 
     player_direction=None, 
-    player_options=None):
+    player_options=None, 
+    logging_level=logging.DEBUG):
 
-    logging.getLogger().setLevel(logging.ERROR)
+    logging.getLogger().setLevel(logging_level)
 
     game = load_game(level_file, 
         player_x, 
