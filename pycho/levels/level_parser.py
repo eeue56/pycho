@@ -3,6 +3,8 @@ from copy import deepcopy
 
 from random import choice, randint
 
+from functools import partial
+
 from pycho.levels import Level
 from pycho.levels.helpers import *
 
@@ -99,7 +101,7 @@ def _generate_walls(world_width, world_height, wall_records):
     wall_dict = {}
     walls = []
 
-    Waller = lambda *a, **kw: Wall(world_width, world_height, *a, **kw)
+    Waller = partial(Wall, world_width, world_height)
 
     for wall, wall_data in wall_records.items():
 
@@ -146,7 +148,7 @@ def load_level(level_id, level_data):
 def generate_objects(file_data, defaults_filename=None):
 
     defaults = load_defaults_from_file(defaults_filename)
-    default_loader = lambda *a, **kw: _load_defaults(defaults, *a, **kw) 
+    default_loader = partial(_load_defaults, defaults)
 
     data = loads(file_data)
 
