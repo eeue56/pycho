@@ -17,7 +17,6 @@ except NameError:
     xrange = range
 
 # level defaults
-# TODO: Move out to file.
 DEFAULT_LEVEL_VALUES = {
     'width' : 100,
     'height' : 100,
@@ -31,6 +30,15 @@ DEFAULT_LEVEL_VALUES = {
     'walls' : {}
 }
 
+def load_defaults_from_file(filename=None):
+    if filename is None:
+        filename = 'defaults.json'
+
+    try:
+        with open(filename) as f:
+            return loads(f.read())
+    except IOError:
+        return DEFAULT_LEVEL_VALUES
 
 def _has_trousers(object_data):
     if 'render_trousers' in object_data:
@@ -107,12 +115,16 @@ def _generate_walls(world_width, world_height, wall_records):
 
     return wall_dict, walls
 
-def _load_defaults(level_data):
-    defaults = deepcopy(DEFAULT_LEVEL_VALUES)
+def _load_defaults(default_dict, level_data):
+    defaults = deepcopy(default_dict)
     defaults.update(level_data)
     return defaults
 
-def generate_objects(file_data):
+def generate_objects(file_data, defaults_filename=None):
+
+    defaults = load_defaults_from_file(defaults_filename)
+    default_loader = lambda *a, **kw: _load_defaults(defaults, *a, **kw) 
+
     data = loads(file_data)
 
     level_dict = {}
@@ -122,7 +134,7 @@ def generate_objects(file_data):
     player = None
 
     for level_id, level_data in data.items():
-        level_data = _load_defaults(level_data)
+        level_data = default_loader(level_data)
 
         world_width = level_data['width']
         world_height = level_data['height']
