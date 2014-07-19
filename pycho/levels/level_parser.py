@@ -107,6 +107,10 @@ def _generate_walls(world_width, world_height, wall_records):
 
     return wall_dict, walls
 
+def _load_defaults(level_data):
+    defaults = deepcopy(DEFAULT_LEVEL_VALUES)
+    defaults.update(level_data)
+    return defaults
 
 def generate_objects(file_data):
     data = loads(file_data)
@@ -118,9 +122,7 @@ def generate_objects(file_data):
     player = None
 
     for level_id, level_data in data.items():
-        defaults = deepcopy(DEFAULT_LEVEL_VALUES)
-        defaults.update(level_data)
-        level_data = defaults
+        level_data = _load_defaults(level_data)
 
         world_width = level_data['width']
         world_height = level_data['height']
