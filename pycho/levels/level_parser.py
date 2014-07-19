@@ -152,7 +152,10 @@ def generate_objects(file_data, defaults_filename=None):
         if walls:
             level.add_objects(walls)
 
-        player = _generate_fixed(level, level_data['fixed'])
+        _player = _generate_fixed(level, level_data['fixed'])
+
+        if _player is not None:
+            player = _player
 
         _generate_random(level, level_data['random'])
 

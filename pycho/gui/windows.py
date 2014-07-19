@@ -91,6 +91,8 @@ class DefaultWindow(QtWidgets.QMainWindow):
     def _defaultKeyPressHandler(self, event):
         key = event.key()
 
+        logging.debug('Key {} was pressed'.format(key))
+
         if key == QT_KEYS['A']:
             face_movement = DIRECTIONS['left']
         elif key == QT_KEYS['D']:
@@ -103,6 +105,9 @@ class DefaultWindow(QtWidgets.QMainWindow):
             face_movement = DIRECTIONS['still']
         else:
             return
+
+        logging.debug('Face movement set to {}'.format(face_movement))
+        logging.debug('Player is facing {}'.format(self.game.player.facing))
 
         self.game.player.facing = face_movement
         self.game.world.tick()
