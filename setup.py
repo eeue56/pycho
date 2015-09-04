@@ -23,5 +23,5 @@ setup(name='pycho',
       author='Enalicho',
       author_email='enalicho@gmail.com',
       packages=find_packages(),
-      requires=['PyQt', 'OpenGL', 'numpy'],
+      install_requires=['PyOpenGL', 'numpy'],
 )
