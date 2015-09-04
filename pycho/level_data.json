@@ -58,7 +58,7 @@
             }],
             "word":[
                 {
-                    "render_trousers" : false,
+                    "render_trousers" : true,
                     "x":15,
                     "y":3,
                     "word" : "hello!\nyou are\n stuck\n1"
@@ -67,7 +67,7 @@
         },
         "random":{
             "old_grumper" : [{
-                "amount" : 3,
+                "amount" : 0,
                 "between" : {
                     "x" : 5,
                     "y" : 5,

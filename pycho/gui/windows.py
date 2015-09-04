@@ -5,7 +5,7 @@ from PyQt5 import QtCore, QtWidgets
 from pycho.gui.widgets import GLPlotWidget
 from pycho.world.navigation import DIRECTIONS
 
-from pycho.gui.interaction import QT_KEYS
+from pycho.gui.interaction import QT_KEYS, is_left, is_right, is_up, is_down
 
 from pycho.world.helpers import box_around
 
@@ -93,13 +93,13 @@ class DefaultWindow(QtWidgets.QMainWindow):
 
         logging.debug('Key {} was pressed'.format(key))
 
-        if key == QT_KEYS['A']:
+        if is_left(key):
             face_movement = DIRECTIONS['left']
-        elif key == QT_KEYS['D']:
+        elif is_right(key):
             face_movement = DIRECTIONS['right']
-        elif key == QT_KEYS['W']:
+        elif is_up(key):
             face_movement = DIRECTIONS['up']
-        elif key == QT_KEYS['S']:
+        elif is_down(key):
             face_movement = DIRECTIONS['down']
         elif key == QT_KEYS['Space']: 
             face_movement = DIRECTIONS['still']
